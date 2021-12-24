@@ -1,0 +1,10 @@
+.musicIcon {
+    margin-right: 5px;
+    transform: translateY(4px);
+    width: 18px;
+    height: 18px;
+    fill: currentcolor;
+}
+.musicIconMobile {
+    color: white;
+}
