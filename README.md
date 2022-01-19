@@ -4,7 +4,7 @@
 
 Виконайте наступні команди:
 
-### ` git clone https://github.com/meteofix/tiktuk.git`
+### ` git clone https://github.com/meteofix/Front-end_School_HW_1.git`
 
 ### `npm install`
 
