@@ -1,0 +1,15 @@
+.volumeButton {
+    position: absolute;
+    right: 12px;
+    bottom: 28px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+.volumeButtonMobile {
+    right: auto;
+    left: 25px;
+}
+.volumeButton svg {
+    transform: translate(10px, 8px);
+}
