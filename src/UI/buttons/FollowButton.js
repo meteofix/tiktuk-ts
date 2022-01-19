@@ -1,10 +1,9 @@
 import React from 'react';
 import classes from './FollowButton.module.css';
 
-const FollowButton = ({ cl = '' }) => (
-  <button type="button" className={`${classes.followButton} ${cl}`}>
-    {' '}
-    Follow{' '}
+const FollowButton = ({ additionalClass = '' }) => (
+  <button type="button" className={`${classes.followButton} ${additionalClass}`}>
+    Follow
   </button>
 );
 

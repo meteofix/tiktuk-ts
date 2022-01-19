@@ -4,7 +4,7 @@ import PlayerProvider from '../store/contexts/PlayerProvider';
 import requestData from '../utils/requestData';
 import { TRENDING_FEED_URL } from '../utils/consts';
 import classes from './TrendingFeed.module.css';
-import l from '../UI/icons/Loader/LoaderWrapper.module.css';
+import loaderClasses from '../UI/icons/Loader/LoaderWrapper.module.css';
 import Loader from '../UI/icons/Loader/Loader';
 import { MediaContext } from '../store/contexts/MediaContext';
 
@@ -29,15 +29,15 @@ const TrendingFeed = () => {
           <div
             className={
               isMobile
-                ? `${l.loaderWrapper} ${l.loaderHeight80} ${l.loaderWrapperMobile}`
-                : `${l.loaderWrapper} ${l.loaderHeight80}`
+                ? `${loaderClasses.loaderWrapper} ${loaderClasses.loaderHeight80} ${loaderClasses.loaderWrapperMobile}`
+                : `${loaderClasses.loaderWrapper} ${loaderClasses.loaderHeight80}`
             }
           >
             <Loader />
           </div>
         ) : (
           <>
-            {responseData?.map((post, index) => (
+            {responseData.map((post, index) => (
               <Post key={post.id} post={post} id={index} />
             ))}
           </>

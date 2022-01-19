@@ -5,7 +5,7 @@ import UserMain from '../components/User/UserMain';
 import requestData from '../utils/requestData';
 import { USER_INFO_URL } from '../utils/consts';
 import classes from './UserProfile.module.css';
-import l from '../UI/icons/Loader/LoaderWrapper.module.css';
+import loaderClasses from '../UI/icons/Loader/LoaderWrapper.module.css';
 import Loader from '../UI/icons/Loader/Loader';
 import { MediaContext } from '../store/contexts/MediaContext';
 
@@ -50,24 +50,16 @@ const UserProfile = () => {
         }
       >
         {isInfoLoading ? (
-          <div className={`${l.loaderWrapper} ${l.loaderHeight80}`}>
+          <div className={`${loaderClasses.loaderWrapper} ${loaderClasses.loaderHeight80}`}>
             <Loader />
           </div>
-        ) : !userInfo || userInfo.length === 0 ? (
-          <div className={`${l.loaderWrapper} ${l.loaderHeight80}`}>
-            <Loader />
-          </div>
-        ) : (
-          <UserHeader userInfo={userInfo} />
-        )}
-        {isInfoLoading ? (
-          ''
         ) : !userInfo || userInfo.length === 0 || !userInfo.user.uniqueId ? (
-          <div className={`${l.loaderWrapper} ${l.loaderHeight80}`}>
-            <Loader />
-          </div>
+          <div>No data</div>
         ) : (
-          <UserMain user={user} />
+          <>
+            <UserHeader userInfo={userInfo} />
+            <UserMain user={user} />
+          </>
         )}
       </div>
     </div>

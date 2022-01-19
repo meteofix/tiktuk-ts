@@ -24,7 +24,7 @@ const UserTitleContainer = ({ uniqueId, verified, nickname }) => {
       {isDesktopOrTablet && <h1 className={classes.userSubTitle}>{nickname}</h1>}
       {isDesktopOrTablet && (
         <div className={classes.userFollowContainer}>
-          <FollowButton cl={classes.followButton} />
+          <FollowButton additionalClass={classes.followButton} />
         </div>
       )}
     </div>

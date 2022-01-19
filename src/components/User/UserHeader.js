@@ -43,7 +43,7 @@ const UserHeader = ({ userInfo }) => {
         <div
           className={isMobile ? `${fl.userFollowContainer} ${fl.userFollowContainerMobile}` : fl.userFollowContainer}
         >
-          <FollowButton cl={isMobile ? `${fl.followButton} ${fl.followButtonMobile}` : fl.followButton} />
+          <FollowButton additionalClass={isMobile ? `${fl.followButton} ${fl.followButtonMobile}` : fl.followButton} />
         </div>
       )}
       {/* <div className={isMobile? classes.userDesc + ' ' + classes.userDescMobile : classes.userDesc} dangerouslySetInnerHTML={{ __html: ParseHashtags(userInfo.user.signature) }}></div> */}

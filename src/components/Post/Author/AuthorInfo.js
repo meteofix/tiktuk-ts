@@ -15,12 +15,8 @@ const AuthorInfo = ({ authorLink, isHover, setIsHover, authorMeta }) => {
           {authorMeta.name}
           {authorMeta.verified ? <UserVerifiedIcon cl={classes.verified} /> : ''}
         </h3>
+        {isDesktopOrTablet && <h4 className={classes.authorNickName}>{authorMeta.nickName}</h4>}
       </Link>
-      {isDesktopOrTablet && (
-        <Link to={authorLink} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-          <h4 className={classes.authorNickName}>{authorMeta.nickName}</h4>
-        </Link>
-      )}
     </div>
   );
 };
