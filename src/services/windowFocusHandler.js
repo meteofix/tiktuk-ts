@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const WindowFocusHandler = ({ onFocus, onBlur }) =>
+const WindowFocusHandler = ({ onFocus, onBlur }) => {
   useEffect(() => {
     window.addEventListener('focus', onFocus);
     window.addEventListener('blur', onBlur);
@@ -9,5 +9,7 @@ const WindowFocusHandler = ({ onFocus, onBlur }) =>
       window.removeEventListener('blur', onBlur);
     };
   });
+  return null;
+};
 
 export default WindowFocusHandler;

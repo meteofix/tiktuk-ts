@@ -14,12 +14,18 @@ const Post = ({ post, id }) => {
   const { isDesktopOrTablet, isMobile } = useContext(MediaContext);
 
   return (
-    <div className={isMobile ? `${classes.postWrapper} ${classes.postWrapperMobile}` : classes.postWrapper}>
+    <div
+      data-testid="postWrapper"
+      className={isMobile ? `${classes.postWrapper} ${classes.postWrapperMobile}` : classes.postWrapper}
+    >
       {isDesktopOrTablet && (
         <AuthorAvatar avatar={post.authorMeta.avatar} authorLink={authorLink} setIsHover={setIsHover} />
       )}
-      <div className={isMobile ? `${classes.postContent} ${classes.postContentMobile}` : classes.postContent}>
-        <div className={isMobile ? classes.mobile : ''}>
+      <div
+        data-testid="postContent"
+        className={isMobile ? `${classes.postContent} ${classes.postContentMobile}` : classes.postContent}
+      >
+        <div data-testid="mobile" className={isMobile ? classes.mobile : ''}>
           <AuthorInfo authorMeta={post.authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
           <VideoMeta text={post.text} />
           {isDesktopOrTablet && (
@@ -27,10 +33,8 @@ const Post = ({ post, id }) => {
               <FollowButton />
             </div>
           )}
-
           <VideoMusic musicMeta={post.musicMeta} />
         </div>
-
         <VideoContainer post={post} id={id} />
       </div>
     </div>

@@ -8,11 +8,15 @@ const UserTitleContainer = ({ uniqueId, verified, nickname }) => {
   const { isDesktopOrTablet, isMobile } = useContext(MediaContext);
   return (
     <div
+      data-testid="userTitleContainer"
       className={
         isMobile ? `${classes.userTitleContainer} ${classes.userTitleContainerMobile}` : classes.userTitleContainer
       }
     >
-      <h2 className={isMobile ? `${classes.userTitle} ${classes.userTitleMobile}` : classes.userTitle}>
+      <h2
+        data-testid="userTitle"
+        className={isMobile ? `${classes.userTitle} ${classes.userTitleMobile}` : classes.userTitle}
+      >
         {isMobile && '@'}
         {uniqueId}
         {verified ? (
@@ -21,11 +25,13 @@ const UserTitleContainer = ({ uniqueId, verified, nickname }) => {
           ''
         )}
       </h2>
-      {isDesktopOrTablet && <h1 className={classes.userSubTitle}>{nickname}</h1>}
       {isDesktopOrTablet && (
-        <div className={classes.userFollowContainer}>
-          <FollowButton additionalClass={classes.followButton} />
-        </div>
+        <>
+          <h1 className={classes.userSubTitle}>{nickname}</h1>
+          <div className={classes.userFollowContainer}>
+            <FollowButton additionalClass={classes.followButton} />
+          </div>
+        </>
       )}
     </div>
   );

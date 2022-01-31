@@ -8,6 +8,7 @@ import { MediaContext } from '../../store/contexts/MediaContext';
 import FollowButton from '../../UI/buttons/FollowButton';
 import fl from './UserInfo/UserTitleContainer.module.css';
 import LeftNav from '../../UI/icons/leftNav';
+import removeProtocolPrefixFromUrl from '../../utils/removeProtocolPrefixFromUrl';
 
 const UserHeader = ({ userInfo }) => {
   const { isMobile } = useContext(MediaContext);
@@ -16,7 +17,10 @@ const UserHeader = ({ userInfo }) => {
   const { link } = user.bioLink;
 
   return (
-    <div className={isMobile ? `${classes.userHeader} ${classes.userHeaderMobile}` : classes.userHeader}>
+    <div
+      data-testid="userHeader"
+      className={isMobile ? `${classes.userHeader} ${classes.userHeaderMobile}` : classes.userHeader}
+    >
       <div className={classes.userHead}>
         <div className={classes.userHeadLeft} onClick={() => navigate(-1)}>
           <LeftNav />
@@ -24,38 +28,48 @@ const UserHeader = ({ userInfo }) => {
         {isMobile && (
           <div className={classes.userHeadCenter}>
             <p>
-              {' '}
-              {user.nickname} | {user.uniqueId}{' '}
+              {user.nickname} | {user.uniqueId}
             </p>
           </div>
         )}
       </div>
-      <div className={isMobile ? `${classes.userInfo} ${classes.userInfoMobile}` : classes.userInfo}>
+      <div
+        data-testid="userInfo"
+        className={isMobile ? `${classes.userInfo} ${classes.userInfoMobile}` : classes.userInfo}
+      >
         <Avatar nickname={user.nickname} avatar={user.avatarMedium} />
         <UserTitleContainer nickname={user.nickname} verified={user.verified} uniqueId={user.uniqueId} />
       </div>
-      <div className={isMobile ? `${classes.countInfos} ${classes.countInfosMobile}` : classes.countInfos}>
+      <div
+        data-testid="countInfos"
+        className={isMobile ? `${classes.countInfos} ${classes.countInfosMobile}` : classes.countInfos}
+      >
         <Counter count={stats.followingCount} title="Following" />
         <Counter count={stats.followerCount} title="Followers" />
         <Counter count={stats.heartCount} title="Likes" />
       </div>
       {isMobile && (
         <div
+          data-testid="userFollowContainer"
           className={isMobile ? `${fl.userFollowContainer} ${fl.userFollowContainerMobile}` : fl.userFollowContainer}
         >
           <FollowButton additionalClass={isMobile ? `${fl.followButton} ${fl.followButtonMobile}` : fl.followButton} />
         </div>
       )}
       {/* <div className={isMobile? classes.userDesc + ' ' + classes.userDescMobile : classes.userDesc} dangerouslySetInnerHTML={{ __html: ParseHashtags(userInfo.user.signature) }}></div> */}
-      <div className={isMobile ? `${classes.userDesc} ${classes.userDescMobile}` : classes.userDesc}>
+      <div
+        data-testid="userDesc"
+        className={isMobile ? `${classes.userDesc} ${classes.userDescMobile}` : classes.userDesc}
+      >
         {user.signature}
       </div>
       <div
         style={link ? {} : { display: 'none' }}
+        data-testid="userLink"
         className={isMobile ? `${classes.userLink} ${classes.userLinkMobile}` : classes.userLink}
       >
         <a target="blank" rel="nofollow noreferrer noopener" href={link}>
-          {link.replace(/(^\w+:|^)\/\//, '')}
+          {removeProtocolPrefixFromUrl(link)}
         </a>
       </div>
     </div>

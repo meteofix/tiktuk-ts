@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ReactPlayer from 'react-player/lazy';
 import { PlayerContext } from '../../../store/contexts/PlayerProvider';
 import { setMuted, setPlayingId } from '../../../store/reducers/playerReducer';
 import useVisibility from '../../../hooks/useVisibility';
-import WindowFocusHandler from '../../../utils/windowFocusHandler';
+import WindowFocusHandler from '../../../services/windowFocusHandler';
 import classes from './VideoContainer.module.css';
-// import l from "../../../UI/icons/Loader/LoaderWrapper.module.css";
 import PlayPauseButton from '../../../UI/buttons/PlayPauseButton';
 import VolumeButton from '../../../UI/buttons/VolumeButton';
-import Item from '../../../UI/buttons/CounterBar/Item';
-import Loader from '../../../UI/icons/Loader/Loader';
+import CounterItem from '../../../services/CounterBar/CounterItem';
+import Loader from '../../../services/Loader/Loader';
 import { MediaContext } from '../../../store/contexts/MediaContext';
 import AuthorAvatar from '../Author/AuthorAvatar';
 import tiktok from '../../../UI/icons/tiktok.png';
+import VideoPlayer from '../../../services/VideoPlayer';
 
 const VideoContainer = ({ post, id }) => {
   const { isMobile } = useContext(MediaContext);
@@ -23,6 +22,10 @@ const VideoContainer = ({ post, id }) => {
   const [isBuffered, setIsBuffered] = useState(false);
   const { isMuted, playingId, dispatch } = useContext(PlayerContext);
   const authorLink = `@${post.authorMeta.name}`;
+
+  const setIsHover = (state) => {
+    setIsVideoHover(state);
+  };
 
   const handlePlayPause = () => {
     if (playingId === id) dispatch(setPlayingId(''));
@@ -45,19 +48,20 @@ const VideoContainer = ({ post, id }) => {
 
   return (
     <div
+      data-testid="videoWrapper"
       className={isMobile ? `${classes.videoWrapper} ${classes.videoWrapperMobile}` : classes.videoWrapper}
       ref={currentElement}
     >
       <div
+        data-testid="videoEvents"
         className={classes.video}
-        onMouseEnter={() => setIsVideoHover(true)}
-        onMouseLeave={() => setIsVideoHover(false)}
+        // onMouseEnter={() => setIsVideoHover(true)}
+        // onMouseLeave={() => setIsVideoHover(false)}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
       >
-        <div className={classes.video} onClick={handlePlayPause}>
+        <div data-testid="videoCont" className={classes.video} onClick={handlePlayPause}>
           {noImage ? (
-            // <div className={l.loaderWrapper}>
-            //     <Loader small/>
-            // </div>
             <img alt="Video cover" className={classes.videoPlayer} src={tiktok} />
           ) : noVideo ? (
             <img
@@ -67,17 +71,13 @@ const VideoContainer = ({ post, id }) => {
               src={isVideoHover ? post.covers.dynamic : post.covers.default}
             />
           ) : (
-            <ReactPlayer
+            <VideoPlayer
               playing={playingId === id}
               className={classes.videoPlayer}
               url={post.videoUrl}
-              onBuffer={() => setIsBuffered(true)}
-              onBufferEnd={() => setIsBuffered(false)}
-              loop
-              onError={() => setNoVideo(true)}
-              muted={isMuted}
-              width="100%"
-              height="100%"
+              setIsBuffered={setIsBuffered}
+              onError={setNoVideo}
+              isMuted={isMuted}
             />
           )}
         </div>
@@ -90,20 +90,26 @@ const VideoContainer = ({ post, id }) => {
         <span style={noVideo ? { display: 'flex' } : { display: 'none' }} className={classes.error}>
           Video downloading error
         </span>
-        <div className={isMobile ? `${classes.playBar} ${classes.playBarMobile}` : classes.playBar}>
+        <div
+          data-testid="playBar"
+          className={isMobile ? `${classes.playBar} ${classes.playBarMobile}` : classes.playBar}
+        >
           <PlayPauseButton id={id} playingId={playingId} handlePlayPause={handlePlayPause} isHover={isVideoHover} />
           <VolumeButton handleMuted={handleMuted} isMuted={isMuted} isHover={isVideoHover} />
         </div>
       </div>
-      <div className={isMobile ? `${classes.counterBar} ${classes.counterBarMobile}` : classes.counterBar}>
+      <div
+        data-testid="counterBar"
+        className={isMobile ? `${classes.counterBar} ${classes.counterBarMobile}` : classes.counterBar}
+      >
         {isMobile && (
           <div className={classes.counterBarAvatar}>
             <AuthorAvatar avatar={post.authorMeta.avatar} authorLink={authorLink} />
           </div>
         )}
-        <Item type="like" count={post.diggCount} />
-        <Item type="comment" count={post.commentCount} />
-        <Item type="share" count={post.shareCount} />
+        <CounterItem type="like" count={post.diggCount} />
+        <CounterItem type="comment" count={post.commentCount} />
+        <CounterItem type="share" count={post.shareCount} />
       </div>
       <WindowFocusHandler onFocus={onFocus} onBlur={onBlur} />
     </div>

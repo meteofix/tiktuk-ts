@@ -8,8 +8,16 @@ const AuthorInfo = ({ authorLink, isHover, setIsHover, authorMeta }) => {
   const { isDesktopOrTablet, isMobile } = useContext(MediaContext);
 
   return (
-    <div className={isMobile ? `${classes.authorInfo} ${classes.authorInfoMobile}` : classes.authorInfo}>
-      <Link to={authorLink} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+    <div
+      data-testid="authorInfo"
+      className={isMobile ? `${classes.authorInfo} ${classes.authorInfoMobile}` : classes.authorInfo}
+    >
+      <Link
+        data-testid="authorLink"
+        to={authorLink}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
         <h3 className={isHover ? `${classes.authorId} ${classes.underline}` : classes.authorId}>
           {isMobile && '@'}
           {authorMeta.name}

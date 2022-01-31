@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Post from '../components/Post/Post';
+import React, { useContext, useEffect } from 'react';
 import PlayerProvider from '../store/contexts/PlayerProvider';
-import requestData from '../utils/requestData';
-import { TRENDING_FEED_URL } from '../utils/consts';
+import requestData from '../api/requestData';
+import { TRENDING_FEED_URL } from '../api/requestDataConfig';
 import classes from './TrendingFeed.module.css';
-import loaderClasses from '../UI/icons/Loader/LoaderWrapper.module.css';
-import Loader from '../UI/icons/Loader/Loader';
+import Loader from '../services/Loader/Loader';
 import { MediaContext } from '../store/contexts/MediaContext';
+import TrendingFeedPostsMapper from '../services/TrendingFeedPostsMapper';
 
 const TrendingFeed = () => {
-  const [responseData, setResponseData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [responseData, setResponseData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   const { isMobile } = useContext(MediaContext);
 
   useEffect(() => {
@@ -22,26 +21,14 @@ const TrendingFeed = () => {
       setIsLoading,
     });
   }, [setResponseData]);
+
   return (
     <PlayerProvider>
-      <div className={isMobile ? `${classes.feedWrapper} ${classes.feedWrapperMobile}` : classes.feedWrapper}>
-        {isLoading ? (
-          <div
-            className={
-              isMobile
-                ? `${loaderClasses.loaderWrapper} ${loaderClasses.loaderHeight80} ${loaderClasses.loaderWrapperMobile}`
-                : `${loaderClasses.loaderWrapper} ${loaderClasses.loaderHeight80}`
-            }
-          >
-            <Loader />
-          </div>
-        ) : (
-          <>
-            {responseData.map((post, index) => (
-              <Post key={post.id} post={post} id={index} />
-            ))}
-          </>
-        )}
+      <div
+        data-testid="feedWrapper"
+        className={isMobile ? `${classes.feedWrapper} ${classes.feedWrapperMobile}` : classes.feedWrapper}
+      >
+        {isLoading ? <Loader /> : <TrendingFeedPostsMapper posts={responseData} />}
       </div>
     </PlayerProvider>
   );

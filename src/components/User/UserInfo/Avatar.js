@@ -6,7 +6,10 @@ const Avatar = ({ nickname, avatar }) => {
   const { isMobile } = useContext(MediaContext);
   return (
     <div className={classes.imageWrap}>
-      <span className={isMobile ? `${classes.tiktokAvatar} ${classes.tiktokAvatarMobile}` : classes.tiktokAvatar}>
+      <span
+        data-testid="tiktokAvatar"
+        className={isMobile ? `${classes.tiktokAvatar} ${classes.tiktokAvatarMobile}` : classes.tiktokAvatar}
+      >
         <img alt={`${nickname} TikTuk`} src={avatar} />
       </span>
     </div>

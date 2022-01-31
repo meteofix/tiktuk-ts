@@ -1,14 +1,7 @@
 import axios from 'axios';
-import { X_RAPIDAPI_HOST, X_RAPIDAPI_KEY } from './consts';
+import { X_RAPIDAPI_HOST, X_RAPIDAPI_KEY } from './requestDataConfig';
 
-const requestData = ({
-  url = '',
-  name = '',
-  responseData = '',
-  setResponseData,
-  setIsLoading = () => false,
-  limit = 30,
-}) => {
+const requestData = ({ url = '', name = '', setResponseData, setIsLoading = () => false, limit = 30 }) => {
   axios
     .get(`${url + name}?limit=${limit}`, {
       headers: {
@@ -19,6 +12,7 @@ const requestData = ({
     .then((response) => {
       setResponseData(response.data);
       setIsLoading(false);
+      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -32,7 +26,7 @@ const requestData = ({
       }
       /* eslint-enable no-console */
     });
-  return responseData;
+  return null;
 };
 
 export default requestData;

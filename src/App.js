@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import AppRouter from './components/AppRouter';
+import AppRouter from './services/AppRouter';
 import { MediaContext } from './store/contexts/MediaContext';
 
 const App = () => {

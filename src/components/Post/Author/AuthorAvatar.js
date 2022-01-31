@@ -9,10 +9,12 @@ const AuthorAvatar = ({ authorLink, avatar, setIsHover = () => false }) => {
 
   return (
     <Link
+      data-testid="postAvatar"
       to={authorLink}
       className={isMobile ? `${classes.postAvatar} ${classes.postAvatarMobile}` : classes.postAvatar}
     >
       <span
+        data-testid="tiktokAvatar"
         className={classes.tiktokAvatar}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}

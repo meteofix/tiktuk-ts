@@ -7,13 +7,17 @@ const VideoMusic = ({ musicMeta }) => {
   const { isMobile } = useContext(MediaContext);
 
   return (
-    <div className={isMobile ? `${classes.musicInfo} ${classes.musicInfoMobile}` : classes.musicInfo}>
+    <div
+      data-testid="musicInfo"
+      className={isMobile ? `${classes.musicInfo} ${classes.musicInfoMobile}` : classes.musicInfo}
+    >
       <MusicIcon />
       <div className={classes.play}>
         <h4>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a>
             <div
+              data-testid="musicInfoText"
               className={isMobile ? `${classes.musicInfoText} ${classes.musicInfoTextMobile}` : classes.musicInfoText}
             >
               {`${musicMeta.musicName} - ${musicMeta.musicAuthor}`}
