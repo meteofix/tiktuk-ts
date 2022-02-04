@@ -6,6 +6,7 @@ import Loader from '../../../services/Loader/Loader';
 import { MediaContext } from '../../../store/contexts/MediaContext';
 import tiktok from '../../../UI/icons/tiktok.png';
 import VideoPlayer from '../../../services/VideoPlayer';
+import videoUrl from '../../../UI/fakeMedia/videos/khaby_lame.mp4';
 
 const VideoCompact = ({ item }) => {
   const { isMobile } = useContext(MediaContext);
@@ -35,7 +36,7 @@ const VideoCompact = ({ item }) => {
         <VideoPlayer
           playing={isHover}
           className={classes.videoPlayer}
-          url={item.video.downloadAddr}
+          url={videoUrl} // url={item.video.downloadAddr}
           setIsBuffered={setIsBuffered}
           onError={setNoVideo}
         />

@@ -7,6 +7,7 @@ import FollowButton from '../../UI/buttons/FollowButton';
 import VideoMusic from './Video/VideoMusic';
 import VideoContainer from './Video/VideoContainer';
 import { MediaContext } from '../../store/contexts/MediaContext';
+import avatar from '../../UI/fakeMedia/images/avatar_kikakiim.jpeg';
 
 const Post = ({ post, id }) => {
   const [isHover, setIsHover] = useState(false);
@@ -19,7 +20,11 @@ const Post = ({ post, id }) => {
       className={isMobile ? `${classes.postWrapper} ${classes.postWrapperMobile}` : classes.postWrapper}
     >
       {isDesktopOrTablet && (
-        <AuthorAvatar avatar={post.authorMeta.avatar} authorLink={authorLink} setIsHover={setIsHover} />
+        <AuthorAvatar
+          avatar={avatar} // avatar={post.authorMeta.avatar}
+          authorLink={authorLink}
+          setIsHover={setIsHover}
+        />
       )}
       <div
         data-testid="postContent"

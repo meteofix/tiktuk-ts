@@ -12,6 +12,7 @@ import { MediaContext } from '../../../store/contexts/MediaContext';
 import AuthorAvatar from '../Author/AuthorAvatar';
 import tiktok from '../../../UI/icons/tiktok.png';
 import VideoPlayer from '../../../services/VideoPlayer';
+import videoUrl from '../../../UI/fakeMedia/videos/kikakiim.mp4';
 
 const VideoContainer = ({ post, id }) => {
   const { isMobile } = useContext(MediaContext);
@@ -74,7 +75,7 @@ const VideoContainer = ({ post, id }) => {
             <VideoPlayer
               playing={playingId === id}
               className={classes.videoPlayer}
-              url={post.videoUrl}
+              url={videoUrl} // url={post.videoUrl}
               setIsBuffered={setIsBuffered}
               onError={setNoVideo}
               isMuted={isMuted}

@@ -9,6 +9,7 @@ import FollowButton from '../../UI/buttons/FollowButton';
 import fl from './UserInfo/UserTitleContainer.module.css';
 import LeftNav from '../../UI/icons/leftNav';
 import removeProtocolPrefixFromUrl from '../../utils/removeProtocolPrefixFromUrl';
+import avatar from '../../UI/fakeMedia/images/avatar_khaby_lame.jpeg';
 
 const UserHeader = ({ userInfo }) => {
   const { isMobile } = useContext(MediaContext);
@@ -37,7 +38,10 @@ const UserHeader = ({ userInfo }) => {
         data-testid="userInfo"
         className={isMobile ? `${classes.userInfo} ${classes.userInfoMobile}` : classes.userInfo}
       >
-        <Avatar nickname={user.nickname} avatar={user.avatarMedium} />
+        <Avatar
+          nickname={user.nickname}
+          avatar={avatar} // avatar={user.avatarMedium}
+        />
         <UserTitleContainer nickname={user.nickname} verified={user.verified} uniqueId={user.uniqueId} />
       </div>
       <div

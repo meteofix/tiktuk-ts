@@ -12,7 +12,6 @@ const requestData = ({ url = '', name = '', setResponseData, setIsLoading = () =
     .then((response) => {
       setResponseData(response.data);
       setIsLoading(false);
-      console.log(response);
       return response;
     })
     .catch((error) => {

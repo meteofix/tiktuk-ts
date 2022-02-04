@@ -7,6 +7,7 @@ import { USER_INFO_URL } from '../api/requestDataConfig';
 import classes from './UserProfile.module.css';
 import Loader from '../services/Loader/Loader';
 import { MediaContext } from '../store/contexts/MediaContext';
+import userinfo from '../json/userInfo.json';
 
 const UserProfile = () => {
   const { isMobile } = useContext(MediaContext);
@@ -15,16 +16,16 @@ const UserProfile = () => {
   const [userInfo, setUserInfo] = React.useState([]);
   const [isInfoLoading, setIsInfoLoading] = React.useState(false);
 
-  useEffect(() => {
-    setIsInfoLoading(true);
-    requestData({
-      url: USER_INFO_URL,
-      name: user,
-      responseData: userInfo,
-      setResponseData: setUserInfo,
-      setIsLoading: setIsInfoLoading,
-    });
-  }, [setUserInfo]);
+  // useEffect(() => {
+  //   setIsInfoLoading(true);
+  //   requestData({
+  //     url: USER_INFO_URL,
+  //     name: user,
+  //     responseData: userInfo,
+  //     setResponseData: setUserInfo,
+  //     setIsLoading: setIsInfoLoading,
+  //   });
+  // }, [setUserInfo]);
 
   /** For broken UserFeed API start */
   // const [userFeed, setUserFeed] = useState([])
@@ -55,11 +56,11 @@ const UserProfile = () => {
         {isInfoLoading}
         {isInfoLoading ? (
           <Loader />
-        ) : !userInfo || userInfo.length === 0 || !userInfo.user.uniqueId ? (
+        ) : !userinfo || userinfo.length === 0 || !userinfo.user.uniqueId ? (
           <div>No data</div>
         ) : (
           <>
-            <UserHeader userInfo={userInfo} />
+            <UserHeader userInfo={userinfo} />
             <UserMain user={user} />
           </>
         )}
