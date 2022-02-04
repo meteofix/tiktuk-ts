@@ -27,6 +27,10 @@ const UserProfile = () => {
   //   });
   // }, [setUserInfo]);
 
+  useEffect(() => {
+    setUserInfo(userinfo);
+  }, []);
+
   /** For broken UserFeed API start */
   // const [userFeed, setUserFeed] = useState([])
   // const [isFeedLoading, setIsFeedLoading] = useState(false)
@@ -56,11 +60,11 @@ const UserProfile = () => {
         {isInfoLoading}
         {isInfoLoading ? (
           <Loader />
-        ) : !userinfo || userinfo.length === 0 || !userinfo.user.uniqueId ? (
+        ) : !userInfo || userInfo.length === 0 || !userInfo.user.uniqueId ? (
           <div>No data</div>
         ) : (
           <>
-            <UserHeader userInfo={userinfo} />
+            <UserHeader userInfo={userInfo} />
             <UserMain user={user} />
           </>
         )}

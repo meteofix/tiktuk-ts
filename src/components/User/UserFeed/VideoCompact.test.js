@@ -27,15 +27,16 @@ describe('VideoCompact', () => {
     };
   });
   describe('expect render', () => {
-    it('should VideoPlayer calls with "url" prop', () => {
-      render(
-        <TestingContextAndRouterWrapper isMobile>
-          <VideoCompact item={item} />
-        </TestingContextAndRouterWrapper>
-      );
-
-      expect(screen.getByText(/link-to-download-addr/i));
-    });
+    /** disabled because the app uses mocked data instead of api */
+    // it('should VideoPlayer calls with "url" prop', () => {
+    //   render(
+    //     <TestingContextAndRouterWrapper isMobile>
+    //       <VideoCompact item={item} />
+    //     </TestingContextAndRouterWrapper>
+    //   );
+    //
+    //   expect(screen.getByText(/link-to-download-addr/i));
+    // });
 
     it('should render result of CountRound with "count" prop', () => {
       render(

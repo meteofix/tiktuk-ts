@@ -59,20 +59,22 @@ describe('TrendingFeed', () => {
       expect(screen.queryByText(/renders trendingfeedpostsmapper/i)).not.toBeInTheDocument();
     });
 
-    it('should call setIsLoading with "true"', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsLoadingMock]);
-      render(<TrendingFeed />);
+    /** disabled because the app uses mocked data instead of api */
+    // it('should call setIsLoading with "true"', () => {
+    //   React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsLoadingMock]);
+    //   render(<TrendingFeed />);
+    //
+    //   expect(setIsLoadingMock).toHaveBeenCalledWith(true);
+    // });
 
-      expect(setIsLoadingMock).toHaveBeenCalledWith(true);
-    });
-
-    it('should calls "requestData" with setResponseData callback ', () => {
-      React.useState.mockReturnValueOnce([[], setResponseDataMock]).mockReturnValueOnce([false, setIsLoadingMock]);
-
-      render(<TrendingFeed />);
-
-      expect(setResponseDataMock).toHaveBeenCalled();
-    });
+    /** disabled because the app uses mocked data instead of api */
+    // it('should calls "requestData" with setResponseData callback ', () => {
+    //   React.useState.mockReturnValueOnce([[], setResponseDataMock]).mockReturnValueOnce([false, setIsLoadingMock]);
+    //
+    //   render(<TrendingFeed />);
+    //
+    //   expect(setResponseDataMock).toHaveBeenCalled();
+    // });
   });
 
   describe('expect classNames', () => {
