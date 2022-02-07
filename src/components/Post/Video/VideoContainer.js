@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { windowFocusHandler } from '@meteofix/tiktuk-component-library';
 import { PlayerContext } from '../../../store/contexts/PlayerProvider';
 import { setMuted, setPlayingId } from '../../../store/reducers/playerReducer';
 import useVisibility from '../../../hooks/useVisibility';
-import WindowFocusHandler from '../../../services/windowFocusHandler';
 import PlayPauseButton from '../../../UI/buttons/PlayPauseButton';
 import VolumeButton from '../../../UI/buttons/VolumeButton';
 import CounterItem from '../../../services/CounterBar/CounterItem';
@@ -53,7 +53,7 @@ const VideoContainer = ({ post, id }) => {
   useEffect(() => {
     if (isVisible) dispatch(setPlayingId(id));
   }, [isVisible]);
-
+  windowFocusHandler({ onFocus, onBlur });
   return (
     <VideoWrapper data-testid="videoWrapper" mobile={isMobile} ref={currentElement}>
       <VideoFrame
@@ -105,7 +105,6 @@ const VideoContainer = ({ post, id }) => {
         <CounterItem type="comment" count={post.commentCount} />
         <CounterItem type="share" count={post.shareCount} />
       </CounterBar>
-      <WindowFocusHandler onFocus={onFocus} onBlur={onBlur} />
     </VideoWrapper>
   );
 };

@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { LikesLockedPage } from '@meteofix/tiktuk-component-library';
 import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
-import LikesLockedPage from './LikesLockedPage';
+import lockIcon from '../../../UI/icons/lockIcon.svg';
 
 describe('LikesLockedPage', () => {
   let user;
@@ -14,7 +15,7 @@ describe('LikesLockedPage', () => {
     it('should render lockIcon ', () => {
       render(
         <TestingContextAndRouterWrapper>
-          <LikesLockedPage user={user} />
+          <LikesLockedPage lockIcon={lockIcon} user={user} />
         </TestingContextAndRouterWrapper>
       );
 

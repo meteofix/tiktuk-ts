@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import LikesLockedPage from './UserFeed/LikesLockedPage';
+import { LikesLockedPage } from '@meteofix/tiktuk-component-library';
+
 import LockedIcon from '../../UI/icons/LockedIcon';
 import { MediaContext } from '../../store/contexts/MediaContext';
 import LikedIcon from '../../UI/icons/LikedIcon';
 import VideosIcon from '../../UI/icons/VideosIcon';
 import UserFeedPostsMapper from '../../services/UserFeedPostsMapper';
 import { BottomLine, TabLiked, TabVideos, UserMainContainer, VideoFeed, VideoFeedTab } from './UserMain.styled';
+import lockIcon from '../../UI/icons/lockIcon.svg';
 
 const UserMain = ({ user, userFeed }) => {
   const { isDesktopOrTablet, isMobile } = useContext(MediaContext);
@@ -47,7 +49,7 @@ const UserMain = ({ user, userFeed }) => {
           <UserFeedPostsMapper posts={userFeed.itemList} />
         </VideoFeed>
       ) : (
-        <LikesLockedPage user={user} />
+        <LikesLockedPage lockIcon={lockIcon} user={user} />
       )}
     </UserMainContainer>
   );

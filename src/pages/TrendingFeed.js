@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
+import { NavBar } from '@meteofix/tiktuk-component-library';
 import PlayerProvider from '../store/contexts/PlayerProvider';
 import Loader from '../services/Loader/Loader';
 import { MediaContext } from '../store/contexts/MediaContext';
 import TrendingFeedPostsMapper from '../services/TrendingFeedPostsMapper';
 import feed from '../json/feed.json';
-import NavBar from '../components/NavBar';
 import { FeedWrapper } from './TrendingFeed.styled';
+import Switcher from '../components/Switcher';
 
 const TrendingFeed = () => {
   const [responseData, setResponseData] = React.useState([]);
@@ -36,7 +37,7 @@ const TrendingFeed = () => {
           <Loader />
         ) : (
           <>
-            {!isMobile && <NavBar />}
+            {!isMobile && <NavBar right={<Switcher />} />}
             <TrendingFeedPostsMapper posts={responseData} />
           </>
         )}

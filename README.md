@@ -10,6 +10,18 @@
 
 ### `npm start`
 
+Для запуску тестів виконайте:
+
+### `npm test`
+
+Для запуску аналізу з допомогою утиліти BundleAnalyzer виконайте:
+
+### `npm analyze`
+
+> Зверніть увагу! Додаток використовує як залежність бібліотеку `@meteofix/tiktuk-component-library`.
+Access token для доступу:
+>### `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`
+
 
 ## Коротка довідка про додаток:
 

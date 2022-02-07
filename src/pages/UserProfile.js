@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from 'react';
+import { NavBar } from '@meteofix/tiktuk-component-library';
+
 import { useLocation } from 'react-router-dom';
 import UserHeader from '../components/User/UserHeader';
 import UserMain from '../components/User/UserMain';
@@ -6,8 +8,9 @@ import Loader from '../services/Loader/Loader';
 import { MediaContext } from '../store/contexts/MediaContext';
 import userinfo from '../json/userInfo.json';
 import userfeed from '../json/user-feed.json';
-import NavBar from '../components/NavBar';
 import { UserInfoInHead, UserLayout, UserLayoutContent } from './UserProfile.styled';
+import Switcher from '../components/Switcher';
+import NavBack from '../services/navBack';
 
 const UserProfile = () => {
   const { isMobile } = useContext(MediaContext);
@@ -58,7 +61,7 @@ const UserProfile = () => {
           <div>No data</div>
         ) : (
           <>
-            <NavBar>
+            <NavBar left={<NavBack />} right={<Switcher />}>
               {isMobile && (
                 <UserInfoInHead>
                   <p>
