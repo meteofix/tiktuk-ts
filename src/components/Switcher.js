@@ -10,7 +10,7 @@ const Switcher = () => {
   };
   return (
     <SwitcherContainer>
-      <Input type="checkbox" checked={theme === 'dark'} onClick={() => switchTheme()} />
+      <Input type="checkbox" checked={theme === 'dark'} onChange={() => switchTheme()} />
       <Slider />
     </SwitcherContainer>
   );
