@@ -20,7 +20,7 @@
 
 > Зверніть увагу! Додаток використовує як залежність бібліотеку `@meteofix/tiktuk-component-library`.
 Access token для доступу:
->### `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`
+>### `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`
 
 
 ## Коротка довідка про додаток:
