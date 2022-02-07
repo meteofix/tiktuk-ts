@@ -2,6 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
 import VideoContainer from './VideoContainer';
+import userEvent from '@testing-library/user-event';
+import PlayerProvider, { PlayerContext } from '../../../store/contexts/PlayerProvider';
 
 jest.mock(
   '../../../services/VideoPlayer',
@@ -10,8 +12,18 @@ jest.mock(
       url
 );
 jest.mock('../../../services/windowFocusHandler', () => () => 'renders windowFocusHandler');
-jest.mock('../../../UI/buttons/PlayPauseButton', () => () => 'renders PlayPauseButton');
-jest.mock('../../../UI/buttons/VolumeButton', () => () => 'renders VolumeButton');
+jest.mock(
+  '../../../UI/buttons/PlayPauseButton',
+  () =>
+    ({ playingId }) =>
+      `renders PlayPauseButton ${playingId}`
+);
+jest.mock(
+  '../../../UI/buttons/VolumeButton',
+  () =>
+    ({ isMuted }) =>
+      `renders VolumeButton ${isMuted}`
+);
 jest.mock('../Author/AuthorAvatar', () => () => 'renders AuthorAvatar');
 jest.mock('../../../hooks/useVisibility', () => () => '');
 jest.mock('../../../services/Loader/Loader', () => () => 'renders Loader');
@@ -41,7 +53,7 @@ describe('VideoContainer', () => {
       shareCount: 6543,
       commentCount: 8064,
     };
-    id = 1;
+    id = 5;
   });
 
   describe('expect render', () => {
@@ -96,6 +108,23 @@ describe('VideoContainer', () => {
         </TestingContextAndRouterWrapper>
       );
       expect(screen.queryByText(/renders authoravatar/i)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('expect user events', () => {
+    it('should set playingId by click on videoFrame ', () => {
+      render(
+        <TestingContextAndRouterWrapper isMobile>
+          <PlayerProvider>
+            <VideoContainer post={post} id={id} />
+          </PlayerProvider>
+        </TestingContextAndRouterWrapper>
+      );
+      expect(screen.queryByText(/renders playpausebutton 5/i)).not.toBeInTheDocument();
+
+      userEvent.click(screen.getByTestId('videoFrame'));
+
+      expect(screen.getByText(/renders playpausebutton 5/i)).toBeInTheDocument();
     });
   });
 

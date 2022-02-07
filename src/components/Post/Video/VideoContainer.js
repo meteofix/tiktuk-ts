@@ -61,7 +61,7 @@ const VideoContainer = ({ post, id }) => {
         onMouseEnter={() => setIsVideoHover(true)}
         onMouseLeave={() => setIsVideoHover(false)}
       >
-        <VideoFrame data-testid="videoCont" onClick={handlePlayPause}>
+        <VideoFrame data-testid="videoFrame" onClick={handlePlayPause}>
           {noImage ? (
             <VideoPlayerImg alt="Video cover" src={tiktok} />
           ) : noVideo ? (

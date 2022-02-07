@@ -6,6 +6,7 @@ const Switcher = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const switchTheme = () => {
+    // eslint-disable-next-line no-unused-expressions
     theme === 'light' ? setTheme('dark') : setTheme('light');
   };
   return (

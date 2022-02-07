@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserHeader from '../components/User/UserHeader';
 import UserMain from '../components/User/UserMain';
@@ -62,6 +62,7 @@ const UserProfile = () => {
               {isMobile && (
                 <UserInfoInHead>
                   <p>
+                    {/* eslint-disable-next-line more/no-duplicated-chains */}
                     {userInfo.user.nickname} | {userInfo.user.uniqueId}
                   </p>
                 </UserInfoInHead>
