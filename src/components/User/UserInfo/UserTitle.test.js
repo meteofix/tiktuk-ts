@@ -109,27 +109,28 @@ describe('UserTitle', () => {
     });
   });
 
-  describe('expect classNames', () => {
-    it('elements should have mobile className when isMobile is true', () => {
-      render(
-        <TestingContextAndRouterWrapper isMobile={true}>
-          <UserTitle uniqueId={uniqueId} nickname={nickname} verified={verified} />
-        </TestingContextAndRouterWrapper>
-      );
-
-      expect(screen.getByTestId('userTitleContainer')).toHaveClass('userTitleContainerMobile');
-      expect(screen.getByTestId('userTitle')).toHaveClass('userTitleMobile');
-    });
-
-    it('elements should not have mobile className when isMobile is false', () => {
-      render(
-        <TestingContextAndRouterWrapper>
-          <UserTitle uniqueId={uniqueId} nickname={nickname} verified={verified} />
-        </TestingContextAndRouterWrapper>
-      );
-
-      expect(screen.getByTestId('userTitleContainer')).not.toHaveClass('userTitleContainerMobile');
-      expect(screen.getByTestId('userTitle')).not.toHaveClass('userTitleMobile');
-    });
-  });
+  /** disabled after switching from css modules to styled components */
+  // describe('expect classNames', () => {
+  //   it('elements should have mobile className when isMobile is true', () => {
+  //     render(
+  //       <TestingContextAndRouterWrapper isMobile={true}>
+  //         <UserTitle uniqueId={uniqueId} nickname={nickname} verified={verified} />
+  //       </TestingContextAndRouterWrapper>
+  //     );
+  //
+  //     expect(screen.getByTestId('userTitleContainer')).toHaveClass('userTitleContainerMobile');
+  //     expect(screen.getByTestId('userTitle')).toHaveClass('userTitleMobile');
+  //   });
+  //
+  //   it('elements should not have mobile className when isMobile is false', () => {
+  //     render(
+  //       <TestingContextAndRouterWrapper>
+  //         <UserTitle uniqueId={uniqueId} nickname={nickname} verified={verified} />
+  //       </TestingContextAndRouterWrapper>
+  //     );
+  //
+  //     expect(screen.getByTestId('userTitleContainer')).not.toHaveClass('userTitleContainerMobile');
+  //     expect(screen.getByTestId('userTitle')).not.toHaveClass('userTitleMobile');
+  //   });
+  // });
 });

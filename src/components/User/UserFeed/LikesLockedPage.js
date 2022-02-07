@@ -4,7 +4,7 @@ import { Description, LockedPage, LockedPageImg, Title } from './LikesLockedPage
 
 const LikesLockedPage = ({ user }) => (
   <LockedPage>
-    <LockedPageImg logo={lockIcon} />
+    <LockedPageImg data-testid="lockImage" logo={lockIcon} />
     <Title>This user`s liked videos are private</Title>
     <Description>Videos liked by {user} are currently hidden</Description>
   </LockedPage>

@@ -72,25 +72,26 @@ describe('AuthorAvatar', () => {
     });
   });
 
-  describe('expect classNames', () => {
-    it('element "postAvatar" should have mobile className when isMobile is true', () => {
-      render(
-        <TestingContextAndRouterWrapper isMobile={true}>
-          <AuthorAvatar avatar={avatar} authorLink={authorLink} setIsHover={setIsHover} />
-        </TestingContextAndRouterWrapper>
-      );
-
-      expect(screen.getByTestId('postAvatar')).toHaveClass('postAvatarMobile');
-    });
-
-    it('element "postAvatar" should not have mobile className when isMobile is false', () => {
-      render(
-        <TestingContextAndRouterWrapper>
-          <AuthorAvatar avatar={avatar} authorLink={authorLink} setIsHover={setIsHover} />
-        </TestingContextAndRouterWrapper>
-      );
-
-      expect(screen.getByTestId('postAvatar')).not.toHaveClass('postAvatarMobile');
-    });
-  });
+  /** disabled after switching from css modules to styled components */
+  // describe('expect classNames', () => {
+  //   it('element "postAvatar" should have mobile className when isMobile is true', () => {
+  //     render(
+  //       <TestingContextAndRouterWrapper isMobile={true}>
+  //         <AuthorAvatar avatar={avatar} authorLink={authorLink} setIsHover={setIsHover} />
+  //       </TestingContextAndRouterWrapper>
+  //     );
+  //
+  //     expect(screen.getByTestId('postAvatar')).toHaveClass('postAvatarMobile');
+  //   });
+  //
+  //   it('element "postAvatar" should not have mobile className when isMobile is false', () => {
+  //     render(
+  //       <TestingContextAndRouterWrapper>
+  //         <AuthorAvatar avatar={avatar} authorLink={authorLink} setIsHover={setIsHover} />
+  //       </TestingContextAndRouterWrapper>
+  //     );
+  //
+  //     expect(screen.getByTestId('postAvatar')).not.toHaveClass('postAvatarMobile');
+  //   });
+  // });
 });

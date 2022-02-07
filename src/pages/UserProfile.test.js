@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
 import TestingContextAndRouterWrapper from '../utils/testingContextAndRouterWrapper';
 import UserProfile from './UserProfile';
-import { BrowserRouter, Router } from 'react-router-dom';
 
 jest.mock('../services/Loader/Loader', () => () => 'renders Loader');
 
@@ -15,19 +15,23 @@ jest.mock('../components/User/UserMain', () => () => 'renders UserMain');
 
 describe('UserProfile', () => {
   describe('expect renders', () => {
-    let useStateMock, setIsInfoLoadingMock, setUserInfoMock, userInfo;
+    let useStateMock, setIsLoadingMock, userInfo, userFeed, setUserFeedMock, setUserInfoMock;
 
     beforeAll(() => {
       useStateMock = React.useState;
     });
     beforeEach(() => {
       React.useState = jest.fn();
-      setIsInfoLoadingMock = jest.fn();
+      setIsLoadingMock = jest.fn();
       setUserInfoMock = jest.fn();
+      setUserFeedMock = jest.fn();
       userInfo = {
         user: {
           uniqueId: 'uniqueId',
         },
+      };
+      userFeed = {
+        someData: 123,
       };
     });
     afterEach(() => {
@@ -35,7 +39,10 @@ describe('UserProfile', () => {
     });
 
     it('should renders Loader when isInfoLoading is true', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([true, setIsInfoLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([true, setIsLoadingMock]);
 
       render(
         <Router location={'/@nnn'}>
@@ -46,7 +53,10 @@ describe('UserProfile', () => {
     });
 
     it('should not renders Loader when isInfoLoading is false', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsInfoLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([false, setIsLoadingMock]);
 
       render(
         <Router location={'/@nnn'}>
@@ -56,8 +66,11 @@ describe('UserProfile', () => {
       expect(screen.queryByText(/renders loader/i)).not.toBeInTheDocument();
     });
 
-    it('should renders UserHeader and UserMain when loading is false and userInfo is empty', () => {
-      React.useState.mockReturnValueOnce([userInfo, () => {}]).mockReturnValueOnce([false, setIsInfoLoadingMock]);
+    it('should renders UserHeader and UserMain when loading is false and userInfo or userFeed is empty', () => {
+      React.useState
+        .mockReturnValueOnce([userInfo, () => {}])
+        .mockReturnValueOnce([userFeed, () => {}])
+        .mockReturnValueOnce([false, setIsLoadingMock]);
 
       render(
         <Router location={'/@nnn'}>
@@ -70,7 +83,10 @@ describe('UserProfile', () => {
     });
 
     it('should not renders UserHeader and UserMain when loading is true', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([true, setIsInfoLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([true, setIsLoadingMock]);
 
       render(
         <Router location={'/@nnn'}>
@@ -82,8 +98,11 @@ describe('UserProfile', () => {
       expect(screen.queryByText(/renders usermain/i)).not.toBeInTheDocument();
     });
 
-    it('should not renders UserHeader and UserMain when userInfo is empty', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsInfoLoadingMock]);
+    it('should not renders UserHeader and UserMain when userInfo or userFeed is empty', () => {
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([false, setIsLoadingMock]);
 
       render(
         <Router location={'/@nnn'}>
@@ -95,11 +114,14 @@ describe('UserProfile', () => {
       expect(screen.queryByText(/renders usermain/i)).not.toBeInTheDocument();
     });
 
-    it('should renders "No data" when loading is false and userInfo is empty', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsInfoLoadingMock]);
+    it('should renders "No data" when loading is false and userInfo or userFeed is empty', () => {
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([false, setIsLoadingMock]);
 
       render(
-        <Router location={'/@nnn'}>
+        <Router location="/@nnn">
           <UserProfile />
         </Router>
       );
@@ -116,8 +138,8 @@ describe('UserProfile', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.getByTestId('userLayout')).toHaveClass('userLayoutMobile');
-      expect(screen.getByTestId('userLayoutContent')).toHaveClass('userLayoutContentMobile');
+      expect(screen.getByTestId('userLayout')).toHaveStyle('width: 100vw');
+      expect(screen.getByTestId('userLayout')).toHaveStyle('max-width: 100vw');
     });
 
     it('elements should not have mobile className when isMobile is false', () => {
@@ -127,8 +149,8 @@ describe('UserProfile', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.queryByTestId('userLayout')).not.toHaveClass('userLayoutMobile');
-      expect(screen.queryByTestId('userLayoutContent')).not.toHaveClass('userLayoutContentMobile');
+      expect(screen.queryByTestId('userLayout')).not.toHaveStyle('width: 100vw');
+      expect(screen.queryByTestId('userLayout')).not.toHaveStyle('max-width: 100vw');
     });
   });
 });

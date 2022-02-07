@@ -33,28 +33,44 @@ describe('TrendingFeed', () => {
 
     it('should renders Loader when loading is true', () => {
       React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([true, setIsLoadingMock]);
-      render(<TrendingFeed />);
+      render(
+        <TestingContextAndRouterWrapper>
+          <TrendingFeed />
+        </TestingContextAndRouterWrapper>
+      );
 
       expect(screen.getByText(/renders loader/i)).toBeInTheDocument();
     });
 
     it('should not renders Loader when loading is false', () => {
       React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsLoadingMock]);
-      render(<TrendingFeed />);
+      render(
+        <TestingContextAndRouterWrapper>
+          <TrendingFeed />
+        </TestingContextAndRouterWrapper>
+      );
 
       expect(screen.queryByText(/renders loader/i)).not.toBeInTheDocument();
     });
 
     it('should renders TrendingFeedPostsMapper when loading is false', () => {
       React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsLoadingMock]);
-      render(<TrendingFeed />);
+      render(
+        <TestingContextAndRouterWrapper>
+          <TrendingFeed />
+        </TestingContextAndRouterWrapper>
+      );
 
       expect(screen.getByText(/renders trendingfeedpostsmapper/i)).toBeInTheDocument();
     });
 
     it('should not renders TrendingFeedPostsMapper when loading is true', () => {
       React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([true, setIsLoadingMock]);
-      render(<TrendingFeed />);
+      render(
+        <TestingContextAndRouterWrapper>
+          <TrendingFeed />
+        </TestingContextAndRouterWrapper>
+      );
 
       expect(screen.queryByText(/renders trendingfeedpostsmapper/i)).not.toBeInTheDocument();
     });
@@ -85,7 +101,11 @@ describe('TrendingFeed', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.getByTestId('feedWrapper')).toHaveClass('feedWrapperMobile');
+      // expect(screen.getByTestId('feedWrapper')).toHaveClass('feedWrapperMobile');
+      expect(screen.getByTestId('feedWrapper')).toHaveStyle('position: absolute');
+      expect(screen.getByTestId('feedWrapper')).toHaveStyle('top: 0');
+      expect(screen.getByTestId('feedWrapper')).toHaveStyle('left: 0');
+      expect(screen.getByTestId('feedWrapper')).toHaveStyle('background: black');
     });
 
     it('elements should not have mobile className when isMobile is false', () => {
@@ -95,7 +115,10 @@ describe('TrendingFeed', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.queryByTestId('feedWrapper')).not.toHaveClass('feedWrapperMobile');
+      expect(screen.queryByTestId('feedWrapper')).not.toHaveStyle('position: absolute');
+      expect(screen.queryByTestId('feedWrapper')).not.toHaveStyle('top: 0');
+      expect(screen.queryByTestId('feedWrapper')).not.toHaveStyle('left: 0');
+      expect(screen.queryByTestId('feedWrapper')).not.toHaveStyle('background: black');
     });
   });
 });

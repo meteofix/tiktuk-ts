@@ -3,8 +3,6 @@ import React from 'react';
 import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
 import LikesLockedPage from './LikesLockedPage';
 
-// jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState('stub data'));
-
 describe('LikesLockedPage', () => {
   let user;
 
@@ -20,7 +18,7 @@ describe('LikesLockedPage', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.getByAltText('lockIcon')).toBeInTheDocument();
+      expect(screen.getByTestId('lockImage')).toBeInTheDocument();
     });
 
     it('should render text with "user" ', () => {
