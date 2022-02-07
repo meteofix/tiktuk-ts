@@ -19,8 +19,8 @@
 ### `npm analyze`
 
 > Зверніть увагу! Додаток використовує як залежність бібліотеку `@meteofix/tiktuk-component-library`.
-Access token для доступу:
->### `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`
+Access token для доступу надіслав у класрумі.
+
 
 
 ## Коротка довідка про додаток:
