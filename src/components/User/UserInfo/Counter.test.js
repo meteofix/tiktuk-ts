@@ -42,7 +42,7 @@ describe('Counter', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.getByTestId('number')).toHaveClass('numberMobile');
+      expect(screen.getByTestId('count')).toHaveClass('numberMobile');
       expect(screen.getByTestId('unit')).toHaveClass('unitMobile');
     });
 
@@ -53,7 +53,7 @@ describe('Counter', () => {
         </TestingContextAndRouterWrapper>
       );
 
-      expect(screen.getByTestId('number')).not.toHaveClass('numberMobile');
+      expect(screen.getByTestId('count')).not.toHaveClass('numberMobile');
       expect(screen.getByTestId('unit')).not.toHaveClass('unitMobile');
     });
   });

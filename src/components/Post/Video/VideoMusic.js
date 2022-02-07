@@ -1,31 +1,20 @@
 import React, { useContext } from 'react';
-import classes from './VideoMusic.module.css';
 import MusicIcon from '../../../UI/icons/MusicIcon';
 import { MediaContext } from '../../../store/contexts/MediaContext';
+import { MusicInfo, MusicInfoText, PlayInfo } from './VideoMusic.styled';
 
 const VideoMusic = ({ musicMeta }) => {
   const { isMobile } = useContext(MediaContext);
 
   return (
-    <div
-      data-testid="musicInfo"
-      className={isMobile ? `${classes.musicInfo} ${classes.musicInfoMobile}` : classes.musicInfo}
-    >
+    <MusicInfo data-testid="musicInfo" mobile={isMobile}>
       <MusicIcon />
-      <div className={classes.play}>
-        <h4>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a>
-            <div
-              data-testid="musicInfoText"
-              className={isMobile ? `${classes.musicInfoText} ${classes.musicInfoTextMobile}` : classes.musicInfoText}
-            >
-              {`${musicMeta.musicName} - ${musicMeta.musicAuthor}`}
-            </div>
-          </a>
-        </h4>
-      </div>
-    </div>
+      <PlayInfo>
+        <MusicInfoText data-testid="musicInfoText" mobile={isMobile}>
+          {`${musicMeta.musicName} - ${musicMeta.musicAuthor}`}
+        </MusicInfoText>
+      </PlayInfo>
+    </MusicInfo>
   );
 };
 

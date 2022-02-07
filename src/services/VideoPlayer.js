@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactPlayer from 'react-player/lazy';
 
-const VideoPlayer = ({ playing, className, url, setIsBuffered, onError, isMuted = true }) => (
+const VideoPlayer = ({ playing, url, setIsBuffered, onError, isMuted = true }) => (
   <ReactPlayer
     playing={playing}
-    className={className}
     url={url}
     onBuffer={() => setIsBuffered(true)}
     onBufferEnd={() => setIsBuffered(false)}

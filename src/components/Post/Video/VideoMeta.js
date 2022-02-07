@@ -1,19 +1,16 @@
 import React, { useContext } from 'react';
-import classes from './VideoMeta.module.css';
 import '../../../utils/parseHashtags.css';
 import { ParseHashtags } from '../../../utils/parseHashtags';
 import { MediaContext } from '../../../store/contexts/MediaContext';
+import { VideoMetaContainer } from './VideoMeta.styled';
 
 const VideoMeta = ({ text }) => {
   const { isMobile } = useContext(MediaContext);
 
   return (
-    <div
-      data-testid="videoMeta"
-      className={isMobile ? `${classes.videoMeta} ${classes.videoMetaMobile}` : classes.videoMeta}
-    >
+    <VideoMetaContainer data-testid="videoMeta" mobile={isMobile}>
       <div dangerouslySetInnerHTML={{ __html: ParseHashtags(text) }} />
-    </div>
+    </VideoMetaContainer>
   );
 };
 

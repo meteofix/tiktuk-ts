@@ -6,7 +6,7 @@ import UserHeader from './UserHeader';
 
 jest.mock('../../utils/removeProtocolPrefixFromUrl', () => (link) => link);
 jest.mock('./UserInfo/Avatar', () => () => 'renders Avatar');
-jest.mock('./UserInfo/UserTitleContainer', () => () => 'renders UserTitleContainer');
+jest.mock('./UserInfo/UserTitle', () => () => 'renders UserTitle');
 jest.mock(
   './UserInfo/Counter',
   () =>

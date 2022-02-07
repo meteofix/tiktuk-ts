@@ -1,6 +1,5 @@
 const RemoveProtocolPrefixFromUrl = (link) => {
-  const result = link.replace(/(^\w+:|^)\/\//, '');
-  return result;
+  return link.replace(/(^\w+:|^)\/\//, '');
 };
 
 export default RemoveProtocolPrefixFromUrl;

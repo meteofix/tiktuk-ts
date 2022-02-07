@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
-import classes from './Post.module.css';
+import { MediaContext } from '../../store/contexts/MediaContext';
 import AuthorInfo from './Author/AuthorInfo';
 import AuthorAvatar from './Author/AuthorAvatar';
 import VideoMeta from './Video/VideoMeta';
 import FollowButton from '../../UI/buttons/FollowButton';
 import VideoMusic from './Video/VideoMusic';
 import VideoContainer from './Video/VideoContainer';
-import { MediaContext } from '../../store/contexts/MediaContext';
 import avatar from '../../UI/fakeMedia/images/avatar_kikakiim.jpeg';
+import { InfoMobile, PostContent, PostWrapper } from './Post.styled';
 
 const Post = ({ post, id }) => {
   const [isHover, setIsHover] = useState(false);
@@ -15,10 +15,7 @@ const Post = ({ post, id }) => {
   const { isDesktopOrTablet, isMobile } = useContext(MediaContext);
 
   return (
-    <div
-      data-testid="postWrapper"
-      className={isMobile ? `${classes.postWrapper} ${classes.postWrapperMobile}` : classes.postWrapper}
-    >
+    <PostWrapper data-testid="postWrapper" mobile={isMobile}>
       {isDesktopOrTablet && (
         <AuthorAvatar
           avatar={avatar} // avatar={post.authorMeta.avatar}
@@ -26,23 +23,16 @@ const Post = ({ post, id }) => {
           setIsHover={setIsHover}
         />
       )}
-      <div
-        data-testid="postContent"
-        className={isMobile ? `${classes.postContent} ${classes.postContentMobile}` : classes.postContent}
-      >
-        <div data-testid="mobile" className={isMobile ? classes.mobile : ''}>
+      <PostContent data-testid="postContent" mobile={isMobile}>
+        <InfoMobile data-testid="mobile" mobile={isMobile}>
           <AuthorInfo authorMeta={post.authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
           <VideoMeta text={post.text} />
-          {isDesktopOrTablet && (
-            <div className={classes.followWrapper}>
-              <FollowButton />
-            </div>
-          )}
+          {isDesktopOrTablet && <FollowButton small />}
           <VideoMusic musicMeta={post.musicMeta} />
-        </div>
+        </InfoMobile>
         <VideoContainer post={post} id={id} />
-      </div>
-    </div>
+      </PostContent>
+    </PostWrapper>
   );
 };
 
