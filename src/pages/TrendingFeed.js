@@ -6,6 +6,7 @@ import TrendingFeedPostsMapper from '../services/TrendingFeedPostsMapper';
 import feed from '../json/feed.json';
 import NavBar from '../components/NavBar';
 import { FeedWrapper } from './TrendingFeed.styled';
+import Switcher from '../components/Switcher';
 
 const TrendingFeed = () => {
   const [responseData, setResponseData] = React.useState([]);
@@ -36,7 +37,7 @@ const TrendingFeed = () => {
           <Loader />
         ) : (
           <>
-            {!isMobile && <NavBar />}
+            {!isMobile && <NavBar right={<Switcher />} />}
             <TrendingFeedPostsMapper posts={responseData} />
           </>
         )}

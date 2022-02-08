@@ -1,8 +1,7 @@
 import React from 'react';
-import lockIcon from '../../../UI/icons/lockIcon.svg';
 import { Description, LockedPage, LockedPageImg, Title } from './LikesLockedPage.styled';
 
-const LikesLockedPage = ({ user }) => (
+const LikesLockedPage = ({ user, lockIcon }) => (
   <LockedPage>
     <LockedPageImg data-testid="lockImage" logo={lockIcon} />
     <Title>This user`s liked videos are private</Title>

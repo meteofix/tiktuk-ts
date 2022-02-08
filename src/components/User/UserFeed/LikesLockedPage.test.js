@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
+import lockIcon from '../../../UI/icons/lockIcon.svg';
 import LikesLockedPage from './LikesLockedPage';
 
 describe('LikesLockedPage', () => {
@@ -14,7 +15,7 @@ describe('LikesLockedPage', () => {
     it('should render lockIcon ', () => {
       render(
         <TestingContextAndRouterWrapper>
-          <LikesLockedPage user={user} />
+          <LikesLockedPage lockIcon={lockIcon} user={user} />
         </TestingContextAndRouterWrapper>
       );
 

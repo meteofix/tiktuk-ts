@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserHeader from '../components/User/UserHeader';
 import UserMain from '../components/User/UserMain';
@@ -8,6 +8,8 @@ import userinfo from '../json/userInfo.json';
 import userfeed from '../json/user-feed.json';
 import NavBar from '../components/NavBar';
 import { UserInfoInHead, UserLayout, UserLayoutContent } from './UserProfile.styled';
+import Switcher from '../components/Switcher';
+import NavBack from '../services/navBack';
 
 const UserProfile = () => {
   const { isMobile } = useContext(MediaContext);
@@ -58,10 +60,11 @@ const UserProfile = () => {
           <div>No data</div>
         ) : (
           <>
-            <NavBar>
+            <NavBar left={<NavBack />} right={<Switcher />}>
               {isMobile && (
                 <UserInfoInHead>
                   <p>
+                    {/* eslint-disable-next-line more/no-duplicated-chains */}
                     {userInfo.user.nickname} | {userInfo.user.uniqueId}
                   </p>
                 </UserInfoInHead>

@@ -14,7 +14,8 @@ export const NavBarContainer = styled.div`
   justify-content: space-between;
   height: 44px;
   font-weight: 700;
-  border-bottom: 0.5px solid rgba(22, 24, 35, 0.08);
+  //border-bottom: 0.5px solid rgba(22, 24, 35, 0.08);
+  border-bottom: 0.5px solid ${(props) => props.theme.lineColor};
 `;
 
 export const NavLeft = styled.div`

@@ -20,12 +20,12 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "npm run build --stats",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "eject": "react-scripts eject",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "analyze": "webpack-bundle-analyzer ./build/bundle-stats.json"
   },
   "browserslist": {
     "production": [
@@ -53,6 +53,7 @@
     "eslint-plugin-testing-library": "^3.10.2",
     "eslint-plugin-unicorn": "^39.0.0",
     "gh-pages": "^3.2.3",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "webpack-bundle-analyzer": "^4.5.0"
   }
 }
