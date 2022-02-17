@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
-import classes from './Counter.module.css';
 import CountRound from '../../../utils/countRound';
 import { MediaContext } from '../../../store/contexts/MediaContext';
+import { Count, Unit } from './Counter.styled';
 
 const Counter = ({ title, count }) => {
   const { isMobile } = useContext(MediaContext);
   return (
-    <div className={isMobile ? `${classes.number} ${classes.numberMobile}` : classes.number}>
-      <strong title={title}>{CountRound({ count })}</strong>
-      <span className={isMobile ? `${classes.unit} ${classes.unitMobile}` : classes.unit}>{title}</span>
-    </div>
+    <Count data-testid="count" mobile={isMobile}>
+      <strong title={title}>{CountRound(count)}</strong>
+      <Unit data-testid="unit" mobile={isMobile}>
+        {title}
+      </Unit>
+    </Count>
   );
 };
 

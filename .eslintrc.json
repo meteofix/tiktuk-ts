@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
@@ -56,6 +57,9 @@
                 }
             }
         ],
+        "unicorn/prevent-abbreviations": 0,
+        "no-shadow": 0,
+        "unicorn/no-null": 0,
         "jsx-a11y/click-events-have-key-events": 0,
         "jsx-a11y/no-noninteractive-element-interactions": 0,
         "jsx-a11y/no-static-element-interactions": 0

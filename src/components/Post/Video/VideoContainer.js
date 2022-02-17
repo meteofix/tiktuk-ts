@@ -1,18 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ReactPlayer from 'react-player/lazy';
 import { PlayerContext } from '../../../store/contexts/PlayerProvider';
 import { setMuted, setPlayingId } from '../../../store/reducers/playerReducer';
 import useVisibility from '../../../hooks/useVisibility';
-import WindowFocusHandler from '../../../utils/windowFocusHandler';
-import classes from './VideoContainer.module.css';
-// import l from "../../../UI/icons/Loader/LoaderWrapper.module.css";
 import PlayPauseButton from '../../../UI/buttons/PlayPauseButton';
 import VolumeButton from '../../../UI/buttons/VolumeButton';
-import Item from '../../../UI/buttons/CounterBar/Item';
-import Loader from '../../../UI/icons/Loader/Loader';
+import CounterItem from '../../../services/CounterBar/CounterItem';
+import Loader from '../../../services/Loader/Loader';
 import { MediaContext } from '../../../store/contexts/MediaContext';
 import AuthorAvatar from '../Author/AuthorAvatar';
 import tiktok from '../../../UI/icons/tiktok.png';
+import videoUrl from '../../../UI/fakeMedia/videos/kikakiim.mp4';
+import avatar from '../../../UI/fakeMedia/images/avatar_kikakiim.jpeg';
+import {
+  BufferedLoader,
+  CounterBar,
+  CounterBarAvatar,
+  ErrorMessage,
+  LayerMask,
+  PlayBar,
+  StyledVideoPlayer,
+  VideoFrame,
+  VideoPlayerImg,
+  VideoWrapper,
+} from './VideoContainer.styled';
+import WindowFocusHandler from '../../../services/windowFocusHandler';
 
 const VideoContainer = ({ post, id }) => {
   const { isMobile } = useContext(MediaContext);
@@ -42,71 +53,59 @@ const VideoContainer = ({ post, id }) => {
   useEffect(() => {
     if (isVisible) dispatch(setPlayingId(id));
   }, [isVisible]);
-
+  WindowFocusHandler({ onFocus, onBlur });
   return (
-    <div
-      className={isMobile ? `${classes.videoWrapper} ${classes.videoWrapperMobile}` : classes.videoWrapper}
-      ref={currentElement}
-    >
-      <div
-        className={classes.video}
+    <VideoWrapper data-testid="videoWrapper" mobile={isMobile} ref={currentElement}>
+      <VideoFrame
+        data-testid="videoEvents"
         onMouseEnter={() => setIsVideoHover(true)}
         onMouseLeave={() => setIsVideoHover(false)}
       >
-        <div className={classes.video} onClick={handlePlayPause}>
+        <VideoFrame data-testid="videoFrame" onClick={handlePlayPause}>
           {noImage ? (
-            // <div className={l.loaderWrapper}>
-            //     <Loader small/>
-            // </div>
-            <img alt="Video cover" className={classes.videoPlayer} src={tiktok} />
+            <VideoPlayerImg alt="Video cover" src={tiktok} />
           ) : noVideo ? (
-            <img
+            <VideoPlayerImg
               alt="cover"
-              className={classes.videoPlayer}
               onError={() => setNoImage(true)}
               src={isVideoHover ? post.covers.dynamic : post.covers.default}
             />
           ) : (
-            <ReactPlayer
+            <StyledVideoPlayer
               playing={playingId === id}
-              className={classes.videoPlayer}
-              url={post.videoUrl}
-              onBuffer={() => setIsBuffered(true)}
-              onBufferEnd={() => setIsBuffered(false)}
-              loop
-              onError={() => setNoVideo(true)}
-              muted={isMuted}
-              width="100%"
-              height="100%"
+              url={videoUrl} // url={post.videoUrl}
+              setIsBuffered={setIsBuffered}
+              onError={setNoVideo}
+              isMuted={isMuted}
             />
           )}
-        </div>
+        </VideoFrame>
         {isBuffered && (
-          <div className={classes.buffered}>
+          <BufferedLoader>
             <Loader small />
-          </div>
+          </BufferedLoader>
         )}
-        <span className={classes.styleLayerMask}> </span>
-        <span style={noVideo ? { display: 'flex' } : { display: 'none' }} className={classes.error}>
-          Video downloading error
-        </span>
-        <div className={isMobile ? `${classes.playBar} ${classes.playBarMobile}` : classes.playBar}>
+        <LayerMask />
+        <ErrorMessage display={noVideo ? 'flex' : 'none'}>Video downloading error</ErrorMessage>
+        <PlayBar data-testid="playBar" mobile={isMobile}>
           <PlayPauseButton id={id} playingId={playingId} handlePlayPause={handlePlayPause} isHover={isVideoHover} />
           <VolumeButton handleMuted={handleMuted} isMuted={isMuted} isHover={isVideoHover} />
-        </div>
-      </div>
-      <div className={isMobile ? `${classes.counterBar} ${classes.counterBarMobile}` : classes.counterBar}>
+        </PlayBar>
+      </VideoFrame>
+      <CounterBar data-testid="counterBar" mobile={isMobile}>
         {isMobile && (
-          <div className={classes.counterBarAvatar}>
-            <AuthorAvatar avatar={post.authorMeta.avatar} authorLink={authorLink} />
-          </div>
+          <CounterBarAvatar>
+            <AuthorAvatar
+              avatar={avatar} // avatar={post.authorMeta.avatar}
+              authorLink={authorLink}
+            />
+          </CounterBarAvatar>
         )}
-        <Item type="like" count={post.diggCount} />
-        <Item type="comment" count={post.commentCount} />
-        <Item type="share" count={post.shareCount} />
-      </div>
-      <WindowFocusHandler onFocus={onFocus} onBlur={onBlur} />
-    </div>
+        <CounterItem type="like" count={post.diggCount} />
+        <CounterItem type="comment" count={post.commentCount} />
+        <CounterItem type="share" count={post.shareCount} />
+      </CounterBar>
+    </VideoWrapper>
   );
 };
 

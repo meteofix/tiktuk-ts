@@ -1,23 +1,27 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import classes from './AuthorInfo.module.css';
-import UserVerifiedIcon from '../../../UI/icons/UserVerifiedIcon';
 import { MediaContext } from '../../../store/contexts/MediaContext';
+import UserVerifiedIcon from '../../../UI/icons/UserVerifiedIcon';
+import { AuthorInfoContainer, AuthorLink, AuthorName, AuthorNickName } from './AuthorInfo.styled';
 
 const AuthorInfo = ({ authorLink, isHover, setIsHover, authorMeta }) => {
   const { isDesktopOrTablet, isMobile } = useContext(MediaContext);
 
   return (
-    <div className={isMobile ? `${classes.authorInfo} ${classes.authorInfoMobile}` : classes.authorInfo}>
-      <Link to={authorLink} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-        <h3 className={isHover ? `${classes.authorId} ${classes.underline}` : classes.authorId}>
+    <AuthorInfoContainer data-testid="authorInfo" mobile={isMobile}>
+      <AuthorLink
+        data-testid="authorLink"
+        to={authorLink}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
+        <AuthorName mobile={isMobile} underline={isHover}>
           {isMobile && '@'}
           {authorMeta.name}
-          {authorMeta.verified ? <UserVerifiedIcon cl={classes.verified} /> : ''}
-        </h3>
-        {isDesktopOrTablet && <h4 className={classes.authorNickName}>{authorMeta.nickName}</h4>}
-      </Link>
-    </div>
+          {authorMeta.verified ? <UserVerifiedIcon small /> : ''}
+        </AuthorName>
+        {isDesktopOrTablet && <AuthorNickName>{authorMeta.nickName}</AuthorNickName>}
+      </AuthorLink>
+    </AuthorInfoContainer>
   );
 };
 

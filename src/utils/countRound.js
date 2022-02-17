@@ -1,4 +1,4 @@
-const CountRound = ({ count }) =>
+const CountRound = (count) =>
   Math.abs(Number(count)) >= 1e9
     ? `${Math.round(Math.abs(Number(count * 10)) / 1e9) / 10}B`
     : Math.abs(Number(count)) >= 1e6

@@ -1,11 +1,19 @@
 import React, { useContext, useState } from 'react';
-import ReactPlayer from 'react-player';
-import classes from './VideoCompact.module.css';
 import CountRound from '../../../utils/countRound';
 import playIcon from '../../../UI/icons/playIcon.svg';
-import Loader from '../../../UI/icons/Loader/Loader';
+import Loader from '../../../services/Loader/Loader';
 import { MediaContext } from '../../../store/contexts/MediaContext';
 import tiktok from '../../../UI/icons/tiktok.png';
+import videoUrl from '../../../UI/fakeMedia/videos/khaby_lame.mp4';
+import {
+  BufferedLoader,
+  PlayIcon,
+  StyledVideoPlayer,
+  VideoCardMask,
+  VideoCount,
+  VideoFeedItem,
+  VideoPlayerImg,
+} from './VideoCompact.styled';
 
 const VideoCompact = ({ item }) => {
   const { isMobile } = useContext(MediaContext);
@@ -15,45 +23,40 @@ const VideoCompact = ({ item }) => {
   const [isBuffered, setIsBuffered] = useState(false);
 
   return (
-    <div
-      className={isMobile ? `${classes.videoFeedItem} ${classes.videoFeedItemMobile}` : classes.videoFeedItem}
+    <VideoFeedItem
+      data-testid="videoFeedItem"
+      mobile={isMobile}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onClick={() => (isHover ? setIsHover(false) : setIsHover(true))}
     >
       {noImage ? (
-        <img alt="Video not found" className={classes.videoPlayer} src={tiktok} />
+        <VideoPlayerImg alt="Video not found" src={tiktok} />
       ) : noVideo ? (
-        <img
+        <VideoPlayerImg
           alt="Video cover"
-          className={classes.videoPlayer}
           onError={() => setNoImage(true)}
           src={isHover ? item.video.dynamicCover : item.video.cover}
         />
       ) : (
-        <ReactPlayer
+        <StyledVideoPlayer
           playing={isHover}
-          className={classes.videoPlayer}
-          url={item.video.downloadAddr}
-          loop
-          onBuffer={() => setIsBuffered(true)}
-          onBufferEnd={() => setIsBuffered(false)}
-          muted
-          onError={() => setNoVideo(true)}
-          width="100%"
-          height="100%"
+          url={videoUrl} // url={item.video.downloadAddr}
+          setIsBuffered={setIsBuffered}
+          onError={setNoVideo}
         />
       )}
+
       {isBuffered && (
-        <div className={classes.buffered}>
+        <BufferedLoader>
           <Loader small />
-        </div>
+        </BufferedLoader>
       )}
-      <div className={classes.videoCardMask}>
-        <img alt="alt" title="title" src={playIcon} />
-        <strong className={classes.videoCount}>{CountRound({ count: item.stats.playCount })}</strong>
-      </div>
-    </div>
+      <VideoCardMask>
+        <PlayIcon alt="alt" title="title" src={playIcon} />
+        <VideoCount>{CountRound(item.stats.playCount)}</VideoCount>
+      </VideoCardMask>
+    </VideoFeedItem>
   );
 };
 
