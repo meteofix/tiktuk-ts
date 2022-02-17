@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
 import VideoContainer from './VideoContainer';
-import userEvent from '@testing-library/user-event';
-import PlayerProvider, { PlayerContext } from '../../../store/contexts/PlayerProvider';
+import PlayerProvider from '../../../store/contexts/PlayerProvider';
 
 jest.mock(
   '../../../services/VideoPlayer',
@@ -89,7 +89,6 @@ describe('VideoContainer', () => {
       expect(screen.getByText(/downloading/i)).toBeInTheDocument();
       expect(screen.getByText(/renders playpausebutton/i)).toBeInTheDocument();
       expect(screen.getByText(/renders volumebutton/i)).toBeInTheDocument();
-      expect(screen.getByText(/renders windowfocushandler/i)).toBeInTheDocument();
     });
 
     it('should render AuthorAvatar when isMobile is true', () => {
@@ -127,31 +126,4 @@ describe('VideoContainer', () => {
       expect(screen.getByText(/renders playpausebutton 5/i)).toBeInTheDocument();
     });
   });
-
-  /** disabled after switching from css modules to styled components */
-  // describe('expect classNames', () => {
-  //   it('elements should have mobile className when isMobile is true', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper isMobile>
-  //         <VideoContainer post={post} id={id} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('videoWrapper')).toHaveClass('videoWrapperMobile');
-  //     expect(screen.getByTestId('playBar')).toHaveClass('playBarMobile');
-  //     expect(screen.getByTestId('counterBar')).toHaveClass('counterBarMobile');
-  //   });
-  //
-  //   it('elements should not have mobile className when isMobile is false', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper>
-  //         <VideoContainer post={post} id={id} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.queryByTestId('videoWrapper')).not.toHaveClass('videoWrapperMobile');
-  //     expect(screen.queryByTestId('playBar')).not.toHaveClass('playBarMobile');
-  //     expect(screen.queryByTestId('counterBar')).not.toHaveClass('counterBarMobile');
-  //   });
-  // });
 });

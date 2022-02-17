@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import TrendingFeedPostsMapper from './TrendingFeedPostsMapper';
 import UserFeedPostsMapper from './UserFeedPostsMapper';
 
 jest.mock(

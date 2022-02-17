@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
 import React from 'react';
+import TestingContextAndRouterWrapper from '../../../utils/testingContextAndRouterWrapper';
 import VideoCompact from './VideoCompact';
-import VideoContainer from '../../Post/Video/VideoContainer';
 
 jest.mock(
   '../../../services/VideoPlayer',
@@ -48,27 +47,4 @@ describe('VideoCompact', () => {
       expect(screen.getByText(/20{6}/i));
     });
   });
-
-  /** disabled after switching from css modules to styled components */
-  // describe('expect classNames', () => {
-  //   it('elements should have mobile className when isMobile is true', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper isMobile>
-  //         <VideoCompact item={item} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('videoFeedItem')).toHaveClass('videoFeedItemMobile');
-  //   });
-  //
-  //   it('elements should not have mobile className when isMobile is false', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper isMobile={false}>
-  //         <VideoCompact item={item} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.queryByTestId('videoFeedItem')).not.toHaveClass('videoFeedItemMobile');
-  //   });
-  // });
 });

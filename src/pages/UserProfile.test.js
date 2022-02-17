@@ -52,72 +52,10 @@ describe('UserProfile', () => {
       expect(screen.getByText(/renders loader/i)).toBeInTheDocument();
     });
 
-    it('should not renders Loader when isInfoLoading is false', () => {
-      React.useState
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([false, setIsLoadingMock]);
-
-      render(
-        <Router location={'/@nnn'}>
-          <UserProfile />
-        </Router>
-      );
-      expect(screen.queryByText(/renders loader/i)).not.toBeInTheDocument();
-    });
-
-    it('should renders UserHeader and UserMain when loading is false and userInfo or userFeed is empty', () => {
+    it('should renders UserHeader and UserMain when loading is false and userInfo and userFeed is not empty', () => {
       React.useState
         .mockReturnValueOnce([userInfo, () => {}])
         .mockReturnValueOnce([userFeed, () => {}])
-        .mockReturnValueOnce([false, setIsLoadingMock]);
-
-      render(
-        <Router location={'/@nnn'}>
-          <UserProfile />
-        </Router>
-      );
-
-      expect(screen.getByText(/renders userheader/i)).toBeInTheDocument();
-      expect(screen.getByText(/renders usermain/i)).toBeInTheDocument();
-    });
-
-    it('should not renders UserHeader and UserMain when loading is true', () => {
-      React.useState
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([true, setIsLoadingMock]);
-
-      render(
-        <Router location={'/@nnn'}>
-          <UserProfile />
-        </Router>
-      );
-
-      expect(screen.queryByText(/renders userheader/i)).not.toBeInTheDocument();
-      expect(screen.queryByText(/renders usermain/i)).not.toBeInTheDocument();
-    });
-
-    it('should not renders UserHeader and UserMain when userInfo or userFeed is empty', () => {
-      React.useState
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([false, setIsLoadingMock]);
-
-      render(
-        <Router location={'/@nnn'}>
-          <UserProfile />
-        </Router>
-      );
-
-      expect(screen.queryByText(/renders userheader/i)).not.toBeInTheDocument();
-      expect(screen.queryByText(/renders usermain/i)).not.toBeInTheDocument();
-    });
-
-    it('should renders "No data" when loading is false and userInfo or userFeed is empty', () => {
-      React.useState
-        .mockReturnValueOnce([[], () => {}])
-        .mockReturnValueOnce([[], () => {}])
         .mockReturnValueOnce([false, setIsLoadingMock]);
 
       render(
@@ -126,12 +64,75 @@ describe('UserProfile', () => {
         </Router>
       );
 
-      expect(screen.getByText(/no data/i)).toBeInTheDocument();
+      expect(screen.getByText(/renders userheader/i)).toBeInTheDocument();
+      expect(screen.getByText(/renders usermain/i)).toBeInTheDocument();
     });
+
+    /** temporary disabled because the app uses mocked data instead of api */
+    // it('should not renders Loader when isLoading is false', () => {
+    //   // React.useState
+    //   //   .mockReturnValueOnce([[], () => {}])
+    //   //   .mockReturnValueOnce([[], () => {}])
+    //   //   .mockReturnValueOnce([false, setIsLoadingMock]);
+    //
+    //   render(
+    //     <Router location="/@nnn">
+    //       <UserProfile />
+    //     </Router>
+    //   );
+    //   expect(screen.queryByText(/renders loader/i)).not.toBeInTheDocument();
+    // });
+
+    // it('should not renders UserHeader and UserMain when loading is true', () => {
+    //   React.useState
+    //     .mockReturnValueOnce([[], () => {}])
+    //     .mockReturnValueOnce([[], () => {}])
+    //     .mockReturnValueOnce([true, setIsLoadingMock]);
+    //
+    //   render(
+    //     <Router location="/@nnn">
+    //       <UserProfile />
+    //     </Router>
+    //   );
+    //
+    //   expect(screen.queryByText(/renders userheader/i)).not.toBeInTheDocument();
+    //   expect(screen.queryByText(/renders usermain/i)).not.toBeInTheDocument();
+    // });
+
+    // it('should not renders UserHeader and UserMain when userInfo or userFeed is empty', () => {
+    //   React.useState
+    //     .mockReturnValueOnce([[], () => {}])
+    //     .mockReturnValueOnce([[], () => {}])
+    //     .mockReturnValueOnce([false, setIsLoadingMock]);
+    //
+    //   render(
+    //     <Router location={'/@nnn'}>
+    //       <UserProfile />
+    //     </Router>
+    //   );
+    //
+    //   expect(screen.queryByText(/renders userheader/i)).not.toBeInTheDocument();
+    //   expect(screen.queryByText(/renders usermain/i)).not.toBeInTheDocument();
+    // });
+
+    // it('should renders "No data" when loading is false and userInfo or userFeed is empty', () => {
+    //   React.useState
+    //     .mockReturnValueOnce([[], () => {}])
+    //     .mockReturnValueOnce([[], () => {}])
+    //     .mockReturnValueOnce([false, setIsLoadingMock]);
+    //
+    //   render(
+    //     <Router location="/@nnn">
+    //       <UserProfile />
+    //     </Router>
+    //   );
+    //
+    //   expect(screen.getByText(/no data/i)).toBeInTheDocument();
+    // });
   });
 
   describe('expect classNames', () => {
-    it('elements should have mobile className when isMobile is true', () => {
+    it('elements should have mobile styles when isMobile is true', () => {
       render(
         <TestingContextAndRouterWrapper isMobile>
           <UserProfile />
@@ -142,7 +143,7 @@ describe('UserProfile', () => {
       expect(screen.getByTestId('userLayout')).toHaveStyle('max-width: 100vw');
     });
 
-    it('elements should not have mobile className when isMobile is false', () => {
+    it('elements should not have mobile styles when isMobile is false', () => {
       render(
         <TestingContextAndRouterWrapper>
           <UserProfile />
