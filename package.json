@@ -1,7 +1,7 @@
 {
   "name": "tiktuk",
   "version": "0.1.0",
-  "homepage": "https://meteofix.github.io/tiktuk",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "-": "0.0.1",
