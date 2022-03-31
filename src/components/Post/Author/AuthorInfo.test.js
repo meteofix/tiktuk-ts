@@ -11,7 +11,7 @@ describe('AuthorInfo', () => {
   let authorMeta, authorLink, isHover;
   const setIsHover = jest.fn();
 
-  beforeEach(function () {
+  beforeEach(() => {
     authorMeta = {
       name: 'kikakiim',
       nickName: 'Kika Kim',
@@ -25,7 +25,12 @@ describe('AuthorInfo', () => {
     it('should render authorMeta name', () => {
       render(
         <TestingContextAndRouterWrapper>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
 
@@ -34,8 +39,13 @@ describe('AuthorInfo', () => {
 
     it('should render "@" before authorMeta name if isMobile is true', () => {
       render(
-        <TestingContextAndRouterWrapper isMobile={true}>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+        <TestingContextAndRouterWrapper isMobile>
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
 
@@ -44,8 +54,13 @@ describe('AuthorInfo', () => {
 
     it('should render authorMeta nickName if isDesktopOrTablet is true', () => {
       render(
-        <TestingContextAndRouterWrapper isDesktopOrTablet={true}>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+        <TestingContextAndRouterWrapper isDesktopOrTablet>
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
 
@@ -56,7 +71,12 @@ describe('AuthorInfo', () => {
       authorMeta.verified = true;
       render(
         <TestingContextAndRouterWrapper>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
 
@@ -65,7 +85,12 @@ describe('AuthorInfo', () => {
     it('should not render UserVerifiedIcon if verified is false', () => {
       render(
         <TestingContextAndRouterWrapper>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
 
@@ -76,7 +101,12 @@ describe('AuthorInfo', () => {
     it('should call setIsHover when mouse hover Link', () => {
       render(
         <TestingContextAndRouterWrapper>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
       expect(setIsHover).not.toHaveBeenCalled();
@@ -88,7 +118,12 @@ describe('AuthorInfo', () => {
     it('should call setIsHover when mouse unhover Link', () => {
       render(
         <TestingContextAndRouterWrapper>
-          <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
+          <AuthorInfo
+            authorMeta={authorMeta}
+            authorLink={authorLink}
+            isHover={isHover}
+            setIsHover={setIsHover}
+          />
         </TestingContextAndRouterWrapper>
       );
       expect(setIsHover).not.toHaveBeenCalled();
@@ -97,49 +132,4 @@ describe('AuthorInfo', () => {
       expect(setIsHover).toHaveBeenCalled();
     });
   });
-
-  /** disabled after switching from css modules to styled components */
-  // describe('expect classNames', () => {
-  //   it('element "authorInfo" should have mobile className when isMobile is true', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper isMobile={true}>
-  //         <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('authorInfo')).toHaveClass('authorInfoMobile');
-  //   });
-  //
-  //   it('element "authorInfo" should not have mobile className when isMobile is false', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper>
-  //         <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('authorInfo')).not.toHaveClass('authorInfoMobile');
-  //   });
-  //
-  //   it('element with "name" should have "underline" className when isHover is true', () => {
-  //     isHover = true;
-  //
-  //     render(
-  //       <TestingContextAndRouterWrapper>
-  //         <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByText(/kikakiim/i)).toHaveClass('underline');
-  //   });
-  //
-  //   it('element with "name" should not have "underline" className when isHover is false', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper>
-  //         <AuthorInfo authorMeta={authorMeta} authorLink={authorLink} isHover={isHover} setIsHover={setIsHover} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByText(/kikakiim/i)).not.toHaveClass('underline');
-  //   });
-  // });
 });

@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import TestingContextAndRouterWrapper from '../../utils/testingContextAndRouterWrapper';
-import VideoMusic from '../Post/Video/VideoMusic';
 import UserHeader from './UserHeader';
 
 jest.mock('../../utils/removeProtocolPrefixFromUrl', () => (link) => link);
@@ -16,10 +15,7 @@ jest.mock(
 jest.mock('../../UI/buttons/FollowButton', () => () => 'renders FollowButton');
 
 describe('UserHeader', () => {
-  let user;
   let userInfo;
-  let stats;
-  let link;
 
   beforeEach(() => {
     userInfo = {
@@ -31,7 +27,8 @@ describe('UserHeader', () => {
         },
         avatarMedium: 'https://link-to-avatar.com',
         verified: false,
-        signature: 'Se vuoi ridere sei nel posto giusto😎 \nIf u wanna laugh u r in the right place😎',
+        signature:
+          'Se vuoi ridere sei nel posto giusto😎 \nIf u wanna laugh u r in the right place😎',
       },
       stats: {
         followerCount: 120_400_000,
@@ -42,6 +39,7 @@ describe('UserHeader', () => {
   });
 
   describe('expect renders', () => {
+    /** need move to navbar? tests */
     // it('should render nickname and uniqueId when isMobile is true', () => {
     //   render(
     //     <TestingContextAndRouterWrapper isMobile>
@@ -109,36 +107,4 @@ describe('UserHeader', () => {
       expect(screen.getByText(/khabyshop.com/i)).toBeInTheDocument();
     });
   });
-
-  /** disabled after switching from css modules to styled components */
-  // describe('expect classNames', () => {
-  //   it('elements should have mobile className when isMobile is true', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper isMobile>
-  //         <UserHeader userInfo={userInfo} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('userHeader')).toHaveClass('userHeaderMobile');
-  //     expect(screen.getByTestId('userInfo')).toHaveClass('userInfoMobile');
-  //     expect(screen.getByTestId('countInfos')).toHaveClass('countInfosMobile');
-  //     expect(screen.getByTestId('userFollowContainer')).toHaveClass('userFollowContainerMobile');
-  //     expect(screen.getByTestId('userDesc')).toHaveClass('userDescMobile');
-  //     expect(screen.getByTestId('userLink')).toHaveClass('userLinkMobile');
-  //   });
-  //
-  //   it('elements should not have mobile className when isMobile is false', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper>
-  //         <UserHeader userInfo={userInfo} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('userHeader')).not.toHaveClass('userHeaderMobile');
-  //     expect(screen.getByTestId('userInfo')).not.toHaveClass('userInfoMobile');
-  //     expect(screen.getByTestId('countInfos')).not.toHaveClass('countInfosMobile');
-  //     expect(screen.getByTestId('userDesc')).not.toHaveClass('userDescMobile');
-  //     expect(screen.getByTestId('userLink')).not.toHaveClass('userLinkMobile');
-  //   });
-  // });
 });

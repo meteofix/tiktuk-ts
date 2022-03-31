@@ -4,7 +4,6 @@ import VideoPlayer from './VideoPlayer';
 jest.mock('react-player/lazy', () => ({ url }) => <>url is {url}</>);
 
 describe('VideoPlayer', () => {
-  // let playing, className, url, setIsBuffered, onError, isMuted;
   let url;
   beforeEach(() => {
     url = 'https://url-to-video.com';

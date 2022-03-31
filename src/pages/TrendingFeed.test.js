@@ -32,7 +32,9 @@ describe('TrendingFeed', () => {
     });
 
     it('should renders Loader when loading is true', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([true, setIsLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([true, setIsLoadingMock]);
       render(
         <TestingContextAndRouterWrapper>
           <TrendingFeed />
@@ -43,7 +45,9 @@ describe('TrendingFeed', () => {
     });
 
     it('should not renders Loader when loading is false', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([false, setIsLoadingMock]);
       render(
         <TestingContextAndRouterWrapper>
           <TrendingFeed />
@@ -54,7 +58,9 @@ describe('TrendingFeed', () => {
     });
 
     it('should renders TrendingFeedPostsMapper when loading is false', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([false, setIsLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([false, setIsLoadingMock]);
       render(
         <TestingContextAndRouterWrapper>
           <TrendingFeed />
@@ -65,7 +71,9 @@ describe('TrendingFeed', () => {
     });
 
     it('should not renders TrendingFeedPostsMapper when loading is true', () => {
-      React.useState.mockReturnValueOnce([[], () => {}]).mockReturnValueOnce([true, setIsLoadingMock]);
+      React.useState
+        .mockReturnValueOnce([[], () => {}])
+        .mockReturnValueOnce([true, setIsLoadingMock]);
       render(
         <TestingContextAndRouterWrapper>
           <TrendingFeed />
@@ -94,7 +102,7 @@ describe('TrendingFeed', () => {
   });
 
   describe('expect classNames', () => {
-    it('elements should have mobile className when isMobile is true', () => {
+    it('elements should have mobile styles when isMobile is true', () => {
       render(
         <TestingContextAndRouterWrapper isMobile>
           <TrendingFeed />
@@ -108,7 +116,7 @@ describe('TrendingFeed', () => {
       expect(screen.getByTestId('feedWrapper')).toHaveStyle('background: black');
     });
 
-    it('elements should not have mobile className when isMobile is false', () => {
+    it('elements should not have mobile styles when isMobile is false', () => {
       render(
         <TestingContextAndRouterWrapper>
           <TrendingFeed />

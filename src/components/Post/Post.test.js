@@ -39,7 +39,7 @@ describe('Post', () => {
 
     it('should render components if isDesktopOrTablet is true', () => {
       render(
-        <TestingContextAndRouterWrapper isDesktopOrTablet={true}>
+        <TestingContextAndRouterWrapper isDesktopOrTablet>
           <Post post={post} id={id} />
         </TestingContextAndRouterWrapper>
       );
@@ -58,31 +58,4 @@ describe('Post', () => {
       expect(screen.queryByText(/renders followbutton/i)).not.toBeInTheDocument();
     });
   });
-
-  /** disabled after switching from css modules to styled components */
-  // describe('expect classNames', () => {
-  //   it('elements should have mobile className when isMobile is true', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper isMobile={true}>
-  //         <Post post={post} id={id} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('postWrapper')).toHaveClass('postWrapperMobile');
-  //     expect(screen.getByTestId('postContent')).toHaveClass('postContentMobile');
-  //     expect(screen.getByTestId('mobile')).toHaveClass('mobile');
-  //   });
-  //
-  //   it('elements should not have mobile className when isMobile is false', () => {
-  //     render(
-  //       <TestingContextAndRouterWrapper>
-  //         <Post post={post} id={id} />
-  //       </TestingContextAndRouterWrapper>
-  //     );
-  //
-  //     expect(screen.getByTestId('postWrapper')).not.toHaveClass('postWrapperMobile');
-  //     expect(screen.getByTestId('postContent')).not.toHaveClass('postContentMobile');
-  //     expect(screen.getByTestId('mobile')).not.toHaveClass('mobile');
-  //   });
-  // });
 });
